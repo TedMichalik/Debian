@@ -12,22 +12,22 @@ sed -i -nr '/NTP=/!p;$aNTP=DC1.samdom.example.com' /etc/systemd/timesyncd.conf
 apt install -y samba winbind libpam-winbind libnss-winbind libpam-krb5 krb5-config krb5-user
 
 # Also install some utility programs:
-apt install -y net-tools wsdd $(check-language-support)
+apt install -y smbclient net-tools wsdd
 
 # Stop all Samba processes and remove the default smb.conf file:
 systemctl stop smbd nmbd winbind
 mv /etc/samba/smb.conf /etc/samba/smb.conf.orig
 
 # Copy the Samba configuration file:
-cp /root/Kubuntu/config/smb.conf /etc/samba/
+cp /root/Debian/config/smb.conf /etc/samba/
 
 # Backup and copy the Kerberos configuration file:
 mv /etc/krb5.conf /etc/skrb5.conf.orig
-cp /root/Kubuntu/config/krb5.conf /etc/
+cp /root/Debian/config/krb5.conf /etc/
 
 # sudo for Domain Admins
-cp /root/Kubuntu/config/SAMDOM /etc/sudoers.d/
+cp /root/Debian/config/SAMDOM /etc/sudoers.d/
 chmod 0440 /etc/sudoers.d/SAMDOM
 
 # Static IP for VirtualBox network interface  <-- Disabled
-#cp /root/DC1/config/VirtualBox /etc/network/interfaces.d/
+#cp /root/Debian/config/VirtualBox /etc/network/interfaces.d/
