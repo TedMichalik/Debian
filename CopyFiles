@@ -4,6 +4,7 @@
 
 # Default UMASK
 sed -i "s/^UMASK.*022/UMASK\t\t002/" /etc/login.defs
+sed -i -nr '/umask/!p;$asession optional pam_umask.so' /etc/pam.d/common-session
 
 # Sync time with the AD DC
 sed -i -nr '/NTP=/!p;$aNTP=DC1.samdom.example.com' /etc/systemd/timesyncd.conf
