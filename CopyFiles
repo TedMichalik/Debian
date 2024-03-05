@@ -13,7 +13,7 @@ sed -i -nr '/NTP=/!p;$aNTP=DC1.samdom.example.com' /etc/systemd/timesyncd.conf
 apt install -y samba winbind libpam-winbind libnss-winbind libpam-krb5 krb5-config krb5-user
 
 # Also install some utility programs:
-apt install -y smbclient net-tools wsdd
+apt install -y smbclient net-tools gvfs-backends wsdd
 
 # Stop all Samba processes and remove the default smb.conf file:
 systemctl stop smbd nmbd winbind
