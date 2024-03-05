@@ -45,17 +45,22 @@ If there are updated packages, run these commands. Otherwise skip to the next st
 sudo apt full-upgrade
 sudo reboot
 ```
-Login as the admin user and mount Guest Additions (Devices | Insert Guest Additions CD image).
+Login as the admin user and delete or comment out the /dev/sr0 line if it exists in fstab:
+```
+sudo nano /etc/fstab
+```
+Mount Guest Additions (Devices | Insert Guest Additions CD image).
 Install the Linux Guest Additions
 ```
 sudo apt install build-essential linux-headers-$(uname -r) -y
 sudo <path to Guest Additions>/VBoxLinuxAdditions.run
 sudo reboot
 ```
-Login as the admin user and switch to root.
+Login as the admin user and switch to root. Install git.
 Clone git repository to download these instructions, scripts and configuration files:
 ```
 sudo su -
+apt install git
 git clone https://github.com/TedMichalik/Debian.git
 ```
 ## Install software and copy config files to their proper location:
@@ -65,6 +70,10 @@ Debian/CopyFiles
 Change the default UMASK in the /etc/login.defs file (Done with CopyFiles):
 ```
 UMASK 002
+```
+Add the umask option to **/etc/pam.d/common-session** file (Done with CopyFiles):
+```
+session optional pam_umask.so
 ```
 Sync time with the AD DC by adding this line to the /etc/systemd/timesyncd.conf file:
 ```
@@ -76,7 +85,7 @@ apt install -y samba winbind libpam-winbind libnss-winbind libpam-krb5 krb5-conf
 ```
 Also install some utility programs (Done with CopyFiles):
 ```
-apt install -y net-tools
+apt install -y net-tools wsdd
 ```
 Stop samba services, backup configuration file and create a new one (Done with CopyFiles):
 ```
