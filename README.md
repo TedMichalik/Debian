@@ -1,5 +1,5 @@
 # Debian - Active Directory Member Server Setup
-Scripts and configuration files needed to set up a member server in an Active Directory Domain.
+Scripts and configuration files needed to set up a Debian desktop in an Active Directory Domain.
 
 Reference links:
 
@@ -29,16 +29,19 @@ Use these Network settings for all machines in VirtualBox:
 Download the Debian image. Boot from it to begin the installation.
 
 * Hostname: Debian
-* Domain: samdom.example.com  <--If not asked for this, add FQDN in /etc/hosts before hostname.
+* Domain: samdom.example.com
 * Enter the desired user name and password for the admin (sudo) account.
 * Make your disk partition selections and write changes to disk.
-* Software selection: standard desktop.
+* Software selection: Debian desktop environment, Xfce (my pick), SSH server, standard system utilities.
 * Install the GRUB boot loader on /dev/sda
 * Finish the installation and reboot.
 
-Login as the admin user and install upgrades:
+Login as the admin user and check for updates:
 ```
 sudo apt update
+```
+If there are updated packages, run these commands. Otherwise skip to the next step.
+```
 sudo apt full-upgrade
 sudo reboot
 ```
@@ -53,7 +56,7 @@ Login as the admin user and switch to root.
 Clone git repository to download these instructions, scripts and configuration files:
 ```
 sudo su -
-git clone https://github.com/TedMichalik/Kubuntu.git
+git clone https://github.com/TedMichalik/Debian.git
 ```
 ## Install software and copy config files to their proper location:
 ```
