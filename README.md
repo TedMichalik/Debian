@@ -85,7 +85,7 @@ apt install -y samba winbind libpam-winbind libnss-winbind libpam-krb5 krb5-conf
 ```
 Also install some utility programs (Done with CopyFiles):
 ```
-apt install -y net-tools wsdd
+apt install -y smbclient net-tools wsdd
 ```
 Stop samba services, backup configuration file and create a new one (Done with CopyFiles):
 ```
